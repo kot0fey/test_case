@@ -1,12 +1,13 @@
 package org.example.task01.multithread;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 
-public class MultithreadSort implements Callable<Integer[]> {
-    private volatile Integer[] array;
+public class MultiThreadSort implements Callable<Integer[]> {
+    private static ExecutorService executorService = Executors.newCachedThreadPool();
+
+    private Integer[] array;
     @Override
     public Integer[] call() throws Exception {
         if (array.length > 1) {
@@ -26,14 +27,11 @@ public class MultithreadSort implements Callable<Integer[]> {
                     pivotList.add(number);
                 }
             }
-
-            ExecutorService executorService = Executors.newFixedThreadPool(2);
-            Callable<Integer[]> callableLess = new MultithreadSort(lessList.toArray(Integer[]::new));
-            Callable<Integer[]> callableMore = new MultithreadSort(moreList.toArray(Integer[]::new));
+            Callable<Integer[]> callableLess = new MultiThreadSort(lessList.toArray(Integer[]::new));
+            Callable<Integer[]> callableMore = new MultiThreadSort(moreList.toArray(Integer[]::new));
 
             Integer[] sortedLessArray = executorService.submit(callableLess).get();
             Integer[] sortedMoreOrEqualsArray = executorService.submit(callableMore).get();
-
 
             List<Integer> sortedList = new ArrayList<>();
             sortedList.addAll(List.of(sortedLessArray));
@@ -44,13 +42,12 @@ public class MultithreadSort implements Callable<Integer[]> {
         return array;
     }
     public static Integer[] sort(Integer[] array) throws ExecutionException, InterruptedException {
-
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Callable<Integer[]> callable = new MultithreadSort(array);
-        Future<Integer[]> future = executorService.submit(callable);
-        return future.get();
+        Callable<Integer[]> callable = new MultiThreadSort(array);
+        Integer[] result = executorService.submit(callable).get();
+        executorService.shutdown();
+        return result;
     }
-    private MultithreadSort(Integer[] array) {
+    private MultiThreadSort(Integer[] array) {
         this.array = array;
     }
 }
