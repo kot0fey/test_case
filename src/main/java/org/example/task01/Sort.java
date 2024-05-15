@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Sort {
 
-    public static Integer[] quickSortSingleThread(Integer[] array) {
+//Todo pivot is doubling
+    public static Integer[] sort(Integer[] array) {
         if (array.length > 1) {
             List<Integer> lessList = new ArrayList<>();
             List<Integer> moreList = new ArrayList<>();
             List<Integer> pivotList = new ArrayList<>();
             Integer pivot = array[0];
-            pivotList.add(pivot);
             for (Integer number : array) {
                 if (number > pivot) {
                     moreList.add(number);
@@ -24,15 +24,16 @@ public class Sort {
                     pivotList.add(number);
                 }
             }
-            Integer[] sortedLessArray = quickSortSingleThread(lessList.toArray(Integer[]::new));
-            Integer[] sortedMoreOrEqualsArray = quickSortSingleThread(moreList.toArray(Integer[]::new));
+            Integer[] sortedLessArray = sort(lessList.toArray(Integer[]::new));
+            Integer[] sortedMoreOrEqualsArray = sort(moreList.toArray(Integer[]::new));
             List<Integer> sortedList = new ArrayList<>();
             sortedList.addAll(List.of(sortedLessArray));
             sortedList.addAll(pivotList);
             sortedList.addAll(List.of(sortedMoreOrEqualsArray));
             return sortedList.toArray(Integer[]::new);
-        } else {
-            return array;
         }
+        return array;
     }
+
+
 }
