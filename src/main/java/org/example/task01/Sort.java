@@ -9,7 +9,7 @@ public class Sort {
         if (array.length > 1) {
             List<Integer> lessList = new ArrayList<>();
             List<Integer> moreList = new ArrayList<>();
-            List pivotList = new ArrayList<>();
+            List<Integer> pivotList = new ArrayList<>();
             Integer pivot = array[0];
             pivotList.add(pivot);
             for (Integer number : array) {
@@ -20,7 +20,7 @@ public class Sort {
                 if (number < pivot) {
                     lessList.add(number);
                 }
-                if (number == pivot) {
+                if (number.equals(pivot)) {
                     pivotList.add(number);
                 }
             }
