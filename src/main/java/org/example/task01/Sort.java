@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Sort {
 
-//Todo pivot is doubling
     public static Integer[] sort(Integer[] array) {
         if (array.length > 1) {
             List<Integer> lessList = new ArrayList<>();
