@@ -14,11 +14,15 @@ public class Main {
             array[i] = random.nextBoolean() ? random.nextInt(Integer.MAX_VALUE) : -random.nextInt(Integer.MAX_VALUE);
         }
         Timer timer = new Timer();
+
+
         timer.setTimer();
         Sort.sort(array);
-        System.out.println(timer.stopTimer());
+        System.out.println("Sort: " + timer.stopTimer());
+
+
         timer.setTimer();
         MultiThreadSort.sort(array);
-        System.out.println(timer.stopTimer());
+        System.out.println("MultiThreadSort: " + timer.stopTimer());
     }
 }
