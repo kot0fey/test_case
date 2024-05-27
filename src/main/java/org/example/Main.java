@@ -1,28 +1,20 @@
 package org.example;
 
-import org.example.task01.Sort;
-import org.example.task01.multithread.MultiThreadSort;
+import org.example.Task01.Task01;
+import org.example.Task01.multithread.MultiThreadSort;
+import org.example.Task02.Task02;
+import org.example.Task03.Task03;
+import org.example.Task04.Task04;
+import org.example.Task08.Task08;
 
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        Integer[] array = new Integer[10000];
-        Random random = new Random();
-        for (int i = 0; i < array.length; i++) {
-            array[i] = random.nextBoolean() ? random.nextInt(Integer.MAX_VALUE) : -random.nextInt(Integer.MAX_VALUE);
-        }
-        Timer timer = new Timer();
+        String s = "[]{}{([]))}";
+        System.out.println(Task08.check(s));
 
 
-        timer.setTimer();
-        Sort.sort(array);
-        System.out.println("Sort: " + timer.stopTimer());
-
-
-        timer.setTimer();
-        MultiThreadSort.sort(array);
-        System.out.println("MultiThreadSort: " + timer.stopTimer());
     }
 }

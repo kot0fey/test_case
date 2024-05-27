@@ -1,10 +1,10 @@
-package org.example.task01;
+package org.example.Task01;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Sort {
+public class Task01 {
 
     private static List<Integer> sort(List<Integer> array) {
         if (array.size() <= 1) {
@@ -21,6 +21,7 @@ public class Sort {
             }
             if (number < pivot) {
                 lessList.add(number);
+                continue;
             }
             if (number.equals(pivot)) {
                 pivotList.add(number);
@@ -35,9 +36,11 @@ public class Sort {
         return sortedList;
     }
 
-    public static Integer[] sort(Integer[] array) {
+    public static Integer[] start(Integer[] array) {
         List<Integer> result = sort(Arrays.stream(array).toList());
         return result.toArray(Integer[]::new);
     }
+
+
 
 }
